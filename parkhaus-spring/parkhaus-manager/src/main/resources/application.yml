@@ -1,0 +1,3 @@
+parkhaus:
+  gebuehr: 2
+  toleranceBtwPaymentAndExit: 30
