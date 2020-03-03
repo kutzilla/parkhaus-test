@@ -10,8 +10,8 @@ import javax.ws.rs.core.MediaType;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Path("/parkhaus")
-public class ParkhausResource {
+@Path("/parkticket")
+public class ParkticketResource {
 
     @Inject
     ParkticketRepository parkticketRepository;

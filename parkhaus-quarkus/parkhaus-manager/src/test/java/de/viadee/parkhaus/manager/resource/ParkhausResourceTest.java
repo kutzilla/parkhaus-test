@@ -12,29 +12,24 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @QuarkusTest
-public class parkhausResourceTest {
+public class ParkhausResourceTest {
 
     @Inject
-    private parkhausResource parkhausResource;
+    private ParkticketResource parkticketResource;
 
     /*
      * Unittest
      */
     @Test
     public void testCreateMethod() {
-        LocalDateTime validTo = LocalDateTime.now().plusDays(1);
-        LocalDateTime validFrom = LocalDateTime.now();
+        LocalDateTime entered = LocalDateTime.now().plusDays(1);
 
-        assertNotNull(parkhausResource.create(validTo, validFrom));
+        assertNotNull(parkticketResource.create(entered));
 
 
         assertThrows(BadRequestException.class,
-                () -> parkhausResource.create(null, null));
+                () -> parkticketResource.create(null));
 
-
-        LocalDateTime unvalidTo = LocalDateTime.now().minusDays(1);
-        assertThrows(BadRequestException.class,
-                () -> parkhausResource.create(unvalidTo, validFrom));
     }
 
     /*
@@ -42,8 +37,8 @@ public class parkhausResourceTest {
      */
     @Test
     public void testCreateEndpoint() {
-        given().queryParam("validTo", "2020-01-31T18:00")
-                .post("/parkhaus")
+        given().queryParam("entered", "2020-01-31T18:00")
+                .post("/parkticket")
                 .then().statusCode(200);
     }
 }

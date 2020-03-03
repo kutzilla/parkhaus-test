@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @MicronautTest
-class ParkticketResourceTest {
+public class ParkticketResourceTest {
 
    @Inject
    ParkticketResource parkticketResource;
@@ -36,7 +36,7 @@ class ParkticketResourceTest {
 
    @Test
    public void createIT(){
-      HttpResponse<String> response =  client.toBlocking().exchange(HttpRequest.POST("/parkhaus?validTo=2020-01-31T18:00", ""));
+      HttpResponse<String> response =  client.toBlocking().exchange(HttpRequest.POST("/parkticket?entered=2020-01-31T18:00", ""));
       assertEquals(HttpStatus.OK, response.getStatus());
    }
 

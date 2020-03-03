@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-alpine
+FROM oracle/graalvm-ce:20.0.0-java11
 
 COPY target/lib/* /deployments/lib/
 COPY target/*-runner.jar /deployments/app.jar

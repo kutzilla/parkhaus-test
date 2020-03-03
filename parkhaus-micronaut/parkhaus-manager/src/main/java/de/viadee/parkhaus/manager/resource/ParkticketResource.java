@@ -24,8 +24,7 @@ public class ParkticketResource {
     }
 
     @Post(produces = MediaType.TEXT_PLAIN)
-    public String create(
-            @QueryValue("entered") LocalDateTime entered) {
+    public String create(@QueryValue("entered") LocalDateTime entered) {
 
         Parkticket parkticket = new Parkticket(entered);
 
