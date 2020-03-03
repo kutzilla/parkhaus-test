@@ -1,3 +1,4 @@
+# TODO: Wenn wir das zu laufen kriegen, können wir ne ganze Serie im Blog machen. Daran beißt sich aktuell die ganze Java-Welt die Zähne aus ;-)
 FROM oracle/graalvm-ce:20.0.0-java11 as graalvm
 COPY . /home/app/parkhaus-manager
 WORKDIR /home/app/parkhaus-manager

@@ -9,11 +9,6 @@ public class ParkhausConfig {
 
    private long toleranceBtwPaymentAndExit;
 
-   public ParkhausConfig(double gebuehr, long toleranceBtwPaymentAndExit) {
-      this.gebuehr = gebuehr;
-      this.toleranceBtwPaymentAndExit = toleranceBtwPaymentAndExit;
-   }
-
    public double getGebuehr() {
       return gebuehr;
    }
