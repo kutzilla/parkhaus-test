@@ -1,6 +1,6 @@
 package de.viadee.parkhaus.schranke.rest;
 
-import de.viadee.parkhaus.schranke.service.SchrankeService;
+import de.viadee.parkhaus.schranke.service.SchrankenService;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
@@ -9,9 +9,9 @@ import io.micronaut.http.annotation.PathVariable;
 @Controller("schranke")
 public class SchrankenResource {
 
-    SchrankeService schrankenService;
+    SchrankenService schrankenService;
 
-    public SchrankenResource(SchrankeService schrankenService) {
+    public SchrankenResource(SchrankenService schrankenService) {
         this.schrankenService = schrankenService;
     }
 
