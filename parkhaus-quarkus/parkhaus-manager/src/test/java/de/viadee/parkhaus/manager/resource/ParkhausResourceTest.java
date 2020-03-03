@@ -21,7 +21,7 @@ public class ParkhausResourceTest {
      * Unittest
      */
     @Test
-    public void testCreateMethod() {
+    public void createTest() {
         LocalDateTime entered = LocalDateTime.now().plusDays(1);
 
         assertNotNull(parkticketResource.create(entered));
@@ -36,7 +36,7 @@ public class ParkhausResourceTest {
      * Integrationstest
      */
     @Test
-    public void testCreateEndpoint() {
+    public void createIT() {
         given().queryParam("entered", "2020-01-31T18:00")
                 .post("/parkticket")
                 .then().statusCode(200);

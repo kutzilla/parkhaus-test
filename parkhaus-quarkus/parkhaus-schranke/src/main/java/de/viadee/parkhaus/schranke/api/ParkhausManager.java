@@ -16,7 +16,6 @@ public interface ParkhausManager {
 
     @Path("{id}/isAllowedToExit")
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
     public boolean isAllowedToExit(@PathParam("id") String id);
 
 }

@@ -16,12 +16,12 @@ public class ParkticketRepository {
     @Inject
     EntityManager em;
 
-    public void persist(Parkticket parkhaus) {
-        em.persist(parkhaus);
+    public void persist(Parkticket parkticket) {
+        em.persist(parkticket);
     }
 
     public List<Parkticket> findAll() {
-        return em.createQuery("select s from parkhaus s", Parkticket.class).getResultList();
+        return em.createQuery("select s from parkticket s", Parkticket.class).getResultList();
     }
 
     public Parkticket findById(String id) {

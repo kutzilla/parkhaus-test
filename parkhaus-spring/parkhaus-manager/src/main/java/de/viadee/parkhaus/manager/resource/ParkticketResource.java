@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping("parkticket")
+@RequestMapping("/parkticket")
 public class ParkticketResource {
 
     private ParkticketRepository parkticketRepository;
@@ -40,8 +40,8 @@ public class ParkticketResource {
         return parkticketRepository.findById(id).orElse(null);
     }
 
-    @GetMapping(path = "getPaymentAmount", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Double getPaymentAmount(String id) {
+    @GetMapping(path = "{id}/getPaymentAmount", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Double getPaymentAmount(@PathVariable("id") String id) {
         Parkticket parkticket = parkticketRepository.findById(id).orElseThrow(NoSuchElementException::new);
         return getPaymentAmount(parkticket);
     }
@@ -56,8 +56,8 @@ public class ParkticketResource {
         return parkhausConfig.getGebuehr() * parkingTime;
     }
 
-    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public boolean makePayment(String id, Double payment) {
+    @PutMapping(value = "{id}/makePayment/{payment}", produces = MediaType.TEXT_PLAIN_VALUE)
+    public boolean makePayment(@PathVariable("id") String id, @PathVariable("payment") Double payment) {
         Parkticket parkticket = parkticketRepository.findById(id).orElseThrow(NoSuchElementException::new);
 
         if (parkticket != null && getPaymentAmount(parkticket).equals(payment)) {

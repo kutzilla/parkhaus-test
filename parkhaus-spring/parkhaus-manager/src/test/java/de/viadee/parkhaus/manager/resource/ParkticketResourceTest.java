@@ -38,7 +38,7 @@ public class ParkticketResourceTest {
 
     @Test
     public void createIT() throws Exception {
-        mvc.perform(post("parkticket?entered=2020-01-31T18:00"))
+        mvc.perform(post("/parkticket?entered=2020-01-31T18:00"))
                 .andExpect(status().isOk());
 
     }

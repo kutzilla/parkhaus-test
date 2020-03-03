@@ -9,6 +9,9 @@ public class ParkhausConfig {
 
    private long toleranceBtwPaymentAndExit;
 
+   public ParkhausConfig() {
+   }
+
    public double getGebuehr() {
       return gebuehr;
    }

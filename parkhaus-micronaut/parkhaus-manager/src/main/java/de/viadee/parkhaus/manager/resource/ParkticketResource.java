@@ -38,8 +38,8 @@ public class ParkticketResource {
         return parkticketRepository.findById(id).orElse(null);
     }
 
-    @Get(produces = MediaType.APPLICATION_JSON)
-    public Double getPaymentAmount(String id) {
+    @Get(value = "{id}/getPaymentAmount", produces = MediaType.APPLICATION_JSON)
+    public Double getPaymentAmount(@PathVariable("id") String id) {
         Parkticket parkticket = parkticketRepository.findById(id).orElseThrow(NoSuchElementException::new);
         return getPaymentAmount(parkticket);
     }
@@ -54,8 +54,8 @@ public class ParkticketResource {
         return parkhausConfig.getGebuehr() * parkingTime;
     }
 
-    @Put(produces = MediaType.APPLICATION_JSON)
-    public boolean makePayment(String id, Double payment) {
+    @Put(value = "{id}/makePayment/{payment}", produces = MediaType.TEXT_PLAIN)
+    public boolean makePayment(@PathVariable("id") String id, @PathVariable("payment") Double payment) {
         Parkticket parkticket = parkticketRepository.findById(id).orElseThrow(NoSuchElementException::new);
 
         if (parkticket != null && getPaymentAmount(parkticket).equals(payment)) {
@@ -68,7 +68,7 @@ public class ParkticketResource {
 
     }
 
-    @Get(produces = MediaType.APPLICATION_JSON)
+    @Get(value = "getAll", produces = MediaType.APPLICATION_JSON)
     public List<Parkticket> getAll() {
         return parkticketRepository.findAll();
     }

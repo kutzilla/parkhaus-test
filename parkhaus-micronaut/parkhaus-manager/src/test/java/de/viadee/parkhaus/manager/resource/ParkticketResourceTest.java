@@ -29,11 +29,17 @@ public class ParkticketResourceTest {
    @Client("/")
    HttpClient client;
 
+   /*
+    * Unittest
+    */
    @Test
    public void createTest(){
          assertNotNull(parkticketResource.create(LocalDateTime.now()));
    }
 
+   /*
+    * Integrationstest
+    */
    @Test
    public void createIT(){
       HttpResponse<String> response =  client.toBlocking().exchange(HttpRequest.POST("/parkticket?entered=2020-01-31T18:00", ""));

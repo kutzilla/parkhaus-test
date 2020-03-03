@@ -13,8 +13,8 @@ public class SchrankenService {
     @RestClient
     ParkhausManager parkhausManager;
 
-    public boolean canExit(String parkhausId) {
-        return this.parkhausManager.isAllowedToExit(parkhausId);
+    public boolean canExit(String id) {
+        return this.parkhausManager.isAllowedToExit(id);
     }
 
 }
