@@ -21,7 +21,7 @@ public class ParkticketRepository {
     }
 
     public List<Parkticket> findAll() {
-        return em.createQuery("select s from parkticket s", Parkticket.class).getResultList();
+        return em.createQuery("select s from Parkticket s", Parkticket.class).getResultList();
     }
 
     public Parkticket findById(String id) {
