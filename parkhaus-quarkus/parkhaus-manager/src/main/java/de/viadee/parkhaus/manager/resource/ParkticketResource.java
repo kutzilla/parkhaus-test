@@ -2,6 +2,7 @@ package de.viadee.parkhaus.manager.resource;
 
 import de.viadee.parkhaus.manager.config.ParkhausConfig;
 import de.viadee.parkhaus.manager.entity.Parkticket;
+import de.viadee.parkhaus.manager.entity.Payment;
 import de.viadee.parkhaus.manager.repository.ParkticketRepository;
 
 import javax.inject.Inject;
@@ -68,16 +69,15 @@ public class ParkticketResource {
     }
 
     @PUT
-    @Path("{id}/makePayment/{payment}")
-    @Produces(MediaType.TEXT_PLAIN)
-    public boolean makePayment(@PathParam("id") String id, @PathParam("payment") Double payment) {
-        Parkticket parkticket = parkticketRepository.findById(id);
+    @Path("{/makePayment")
+    public boolean makePayment(Payment payment) {
+        Parkticket parkticket = parkticketRepository.findById(payment.getId());
 
         if (parkticket == null) {
             throw new NoSuchElementException();
         }
 
-        if (parkticket != null && getPaymentAmount(parkticket).equals(payment)) {
+        if (parkticket != null && getPaymentAmount(parkticket).equals(payment.getPayment())) {
             parkticket.setPayment(LocalDateTime.now());
             parkticketRepository.persist(parkticket);
             return true;
