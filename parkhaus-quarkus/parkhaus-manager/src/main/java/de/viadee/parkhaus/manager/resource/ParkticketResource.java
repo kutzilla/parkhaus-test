@@ -52,7 +52,7 @@ public class ParkticketResource {
     }
 
     @GET
-    @Path("{id}/getPaymentAmount")
+    @Path("/{id}/getPaymentAmount")
     @Produces(MediaType.APPLICATION_JSON)
     public Double getPaymentAmount(@PathParam("id") String id) {
         Parkticket parkticket = parkticketRepository.findById(id);
@@ -73,7 +73,7 @@ public class ParkticketResource {
     }
 
     @PUT
-    @Path("{/makePayment")
+    @Path("/makePayment")
     public boolean makePayment(Payment payment) {
         Parkticket parkticket = parkticketRepository.findById(payment.getId());
 
@@ -91,15 +91,14 @@ public class ParkticketResource {
 
     }
 
-    @GET
-    @Path("getAll")
+    @Path("/getAll")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Parkticket> getAll() {
         return parkticketRepository.findAll();
     }
 
     @GET
-    @Path("{id}/isAllowedToExit")
+    @Path("/{id}/isAllowedToExit")
     @Produces(MediaType.APPLICATION_JSON)
     public boolean isAllowedToExit(@PathParam("id") String id) {
         Parkticket parkticket = this.parkticketRepository.findById(id);
