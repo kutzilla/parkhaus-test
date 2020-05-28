@@ -1,5 +1,6 @@
 package de.viadee.parkhaus.manager.resource;
 
+import de.viadee.parkhaus.manager.config.ParkhausConfig;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +14,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @QuarkusTest
 public class ParkhausResourceTest {
+
+
+
+    private ParkhausConfig parkhausConfig;
 
     @Inject
     private ParkticketResource parkticketResource;
