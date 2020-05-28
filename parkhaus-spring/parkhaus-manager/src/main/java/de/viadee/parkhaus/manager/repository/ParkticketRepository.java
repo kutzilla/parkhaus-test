@@ -1,14 +1,13 @@
 package de.viadee.parkhaus.manager.repository;
 
 import de.viadee.parkhaus.manager.entity.Parkticket;
-import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.Collection;
 
-public interface ParkticketRepository extends CrudRepository<Parkticket, String> {
+public interface ParkticketRepository {
+    void persist(Parkticket parkticket);
 
-    public List<Parkticket> findAll();
+    Collection<Parkticket> findAll();
 
-    public Optional<Parkticket> findById(String id);
+    Parkticket findById(String id);
 }
