@@ -15,10 +15,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @QuarkusTest
 public class ParkhausResourceTest {
 
-
-
-    private ParkhausConfig parkhausConfig;
-
     @Inject
     private ParkticketResource parkticketResource;
 

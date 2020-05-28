@@ -20,6 +20,10 @@ public class ParkticketResource {
 
     ParkhausConfig parkhausConfig;
 
+    public ParkticketResource() {
+
+    }
+
     @Inject
     public ParkticketResource(ParkticketRepository parkticketRepository, ParkhausConfig parkhausConfig) {
         this.parkticketRepository = parkticketRepository;
