@@ -2,7 +2,6 @@ package de.viadee.parkhaus.manager.resource;
 
 import de.viadee.parkhaus.manager.config.ParkhausConfig;
 import de.viadee.parkhaus.manager.entity.Parkticket;
-import de.viadee.parkhaus.manager.entity.Payment;
 import de.viadee.parkhaus.manager.repository.ParkticketRepository;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.*;
@@ -55,11 +54,11 @@ public class ParkticketResource {
         return parkhausConfig.getGebuehr() * parkingTime;
     }
 
-    @Put(value = "/makePayment")
-    public boolean makePayment(Payment payment) {
-        Parkticket parkticket = parkticketRepository.findById(payment.getId()).orElseThrow(NoSuchElementException::new);
+    @Put(value = "{id}/makePayment")
+    public Boolean makePayment(@PathVariable("id") String id, @Body Double payment) {
+        Parkticket parkticket = parkticketRepository.findById(id).orElseThrow(NoSuchElementException::new);
 
-        if (parkticket != null && getPaymentAmount(parkticket).equals(payment.getPayment())) {
+        if (parkticket != null && getPaymentAmount(parkticket).equals(payment)) {
             parkticket.setPayment(LocalDateTime.now());
             parkticketRepository.save(parkticket);
             return true;

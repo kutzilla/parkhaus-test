@@ -4,6 +4,7 @@ WORKDIR /home/app/parkhaus-manager
 RUN mvn -ntp install
 
 FROM openjdk:11-jre
-COPY --from=maven /home/app/parkhaus-manager/target/parkhaus-manager-spring-1.0-SNAPSHOT.jar /deployments/app.jar
-EXPOSE 8080
+COPY --from=maven /home/app/parkhaus-manager/target/lib/* /deployments/lib/
+COPY --from=maven /home/app/parkhaus-manager/target/*-runner.jar /deployments/app.jar
+EXPOSE 8180
 ENTRYPOINT ["java","-jar","/deployments/app.jar"]

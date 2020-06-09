@@ -4,7 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties
 @ConfigurationProperties("parkhaus")
 public class ParkhausConfig {
@@ -12,9 +12,6 @@ public class ParkhausConfig {
    private double gebuehr;
 
    private long toleranceBtwPaymentAndExit;
-
-   public ParkhausConfig() {
-   }
 
    public double getGebuehr() {
       return gebuehr;
