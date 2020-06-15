@@ -1,6 +1,6 @@
 # Java Cloud Parkhaus
 
-![Build Status](https://www.travis-ci.org/kutzilla/parkhaus-test.svg?branch=master)
+[![Build Status](https://www.travis-ci.org/kutzilla/parkhaus-test.svg?branch=master)](https://www.travis-ci.org/kutzilla/parkhaus-test)
 
 ## Example
 
