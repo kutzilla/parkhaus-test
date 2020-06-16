@@ -30,23 +30,19 @@ public class ParkticketResource {
 
         Parkticket parkticket = new Parkticket(entered);
 
-        parkticketRepository.persist(parkticket);
+        parkticketRepository.save(parkticket);
 
         return parkticket.getId();
     }
 
     @GetMapping
     public Parkticket get(String id) {
-        return parkticketRepository.findById(id);
+        return parkticketRepository.findById(id).orElseThrow(NoSuchElementException::new);
     }
 
    @GetMapping(path = "{id}/getPaymentAmount")
     public Double getPaymentAmount(@PathVariable("id") String id) {
-        Parkticket parkticket = parkticketRepository.findById(id);
-
-       if (parkticket == null) {
-           throw new NoSuchElementException();
-       }
+        Parkticket parkticket = parkticketRepository.findById(id).orElseThrow(NoSuchElementException::new);
 
         return getPaymentAmount(parkticket);
     }
@@ -61,17 +57,13 @@ public class ParkticketResource {
         return parkhausConfig.getGebuehr() * parkingTime;
     }
 
-    @PutMapping(value = "/{id}/makePayment", consumes = MediaType.TEXT_PLAIN_VALUE)
-    public Boolean makePayment(@RequestBody Double payment, @PathVariable String id) {
-        Parkticket parkticket = parkticketRepository.findById(id);
+    @PutMapping(value = "{id}/makePayment", consumes = MediaType.TEXT_PLAIN_VALUE)
+    public Boolean makePayment(@RequestBody String payment, @PathVariable String id) {
+        Parkticket parkticket = parkticketRepository.findById(id).orElseThrow(NoSuchElementException::new);
 
-        if (parkticket == null) {
-            throw new NoSuchElementException();
-        }
-
-       if (parkticket != null && getPaymentAmount(parkticket).equals(payment)) {
+       if (getPaymentAmount(parkticket).equals(Double.valueOf(payment))) {
             parkticket.setPayment(LocalDateTime.now());
-            parkticketRepository.persist(parkticket);
+            parkticketRepository.save(parkticket);
             return true;
         } else {
            return false;
@@ -86,11 +78,7 @@ public class ParkticketResource {
 
     @GetMapping(path = "/{id}/isAllowedToExit")
     public Boolean isAllowedToExit(@PathVariable("id") String id) {
-        Parkticket parkticket = parkticketRepository.findById(id);
-
-        if (parkticket == null) {
-            throw new NoSuchElementException();
-        }
+        Parkticket parkticket = parkticketRepository.findById(id).orElseThrow(NoSuchElementException::new);
 
         LocalDateTime now = LocalDateTime.now();
         return parkticket.getEntered().isBefore(now)
