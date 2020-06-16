@@ -10,13 +10,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 
-@Path("schranke")
+@Path("/schranke")
 public class SchrankenResource {
 
     @Inject
     SchrankenService SchrankenService;
 
-    @Path("{id}")
+    @Path("/{id}")
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String get(@PathParam("id") String id) {

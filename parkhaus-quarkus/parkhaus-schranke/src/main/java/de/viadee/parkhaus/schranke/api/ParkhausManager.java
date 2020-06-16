@@ -11,7 +11,7 @@ import javax.ws.rs.core.MediaType;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 @RegisterRestClient
-@Path("parkticket")
+@Path("/parkticket")
 public interface ParkhausManager {
 
     @Path("{id}/isAllowedToExit")

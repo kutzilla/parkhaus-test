@@ -1,9 +1,13 @@
 package de.viadee.parkhaus.manager.entity;
 
+import javax.persistence.Id;
+
 public class Payment {
 
-   String id;
-   Double payment;
+    @Id
+    String id;
+
+    Double payment;
 
     public Payment(String id, Double payment) {
         this.id = id;
