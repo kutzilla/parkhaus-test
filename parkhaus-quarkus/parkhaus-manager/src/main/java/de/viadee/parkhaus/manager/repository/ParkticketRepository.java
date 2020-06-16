@@ -13,8 +13,12 @@ import java.util.List;
 @Transactional(rollbackOn = Exception.class)
 public class ParkticketRepository {
 
+    final EntityManager em;
+
     @Inject
-    EntityManager em;
+    public ParkticketRepository(EntityManager em) {
+        this.em = em;
+    }
 
     public void persist(Parkticket parkticket) {
         em.persist(parkticket);
