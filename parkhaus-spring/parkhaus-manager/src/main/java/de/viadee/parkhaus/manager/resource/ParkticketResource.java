@@ -4,6 +4,7 @@ import de.viadee.parkhaus.manager.config.ParkhausConfig;
 import de.viadee.parkhaus.manager.entity.Parkticket;
 import de.viadee.parkhaus.manager.repository.ParkticketRepository;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -60,7 +61,7 @@ public class ParkticketResource {
         return parkhausConfig.getGebuehr() * parkingTime;
     }
 
-    @PutMapping(value = "/{id}/makePayment")
+    @PutMapping(value = "/{id}/makePayment", consumes = MediaType.TEXT_PLAIN_VALUE)
     public Boolean makePayment(@RequestBody Double payment, @PathVariable String id) {
         Parkticket parkticket = parkticketRepository.findById(id);
 

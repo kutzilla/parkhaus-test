@@ -7,6 +7,6 @@ micronaut:
   http:
     port:
     services:
-      manager:
+      parkhaus-manager:
         urls:
           - http://localhost:8280/

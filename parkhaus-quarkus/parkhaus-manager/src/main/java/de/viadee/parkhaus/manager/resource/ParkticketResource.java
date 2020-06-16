@@ -69,6 +69,7 @@ public class ParkticketResource {
 
     @PUT
     @Path("{id}/makePayment")
+    @Consumes(MediaType.TEXT_PLAIN)
     public Boolean makePayment(@PathParam("id") String id, Double payment) {
         Parkticket parkticket = parkticketRepository.findById(id);
 

@@ -54,13 +54,13 @@ public class ParkticketResource {
         return parkhausConfig.getGebuehr() * parkingTime;
     }
 
-    @Put(value = "{id}/makePayment")
+    @Put(value = "{id}/makePayment", consumes = MediaType.TEXT_PLAIN)
     public Boolean makePayment(@PathVariable("id") String id, @Body Double payment) {
         Parkticket parkticket = parkticketRepository.findById(id).orElseThrow(NoSuchElementException::new);
 
         if (parkticket != null && getPaymentAmount(parkticket).equals(payment)) {
             parkticket.setPayment(LocalDateTime.now());
-            parkticketRepository.save(parkticket);
+            parkticketRepository.update(parkticket);
             return true;
         } else {
             return false;

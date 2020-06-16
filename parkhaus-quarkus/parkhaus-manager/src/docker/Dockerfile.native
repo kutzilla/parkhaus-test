@@ -1,7 +1,7 @@
 FROM maven:3.6.3-openjdk-11 as maven
 COPY . /home/app/parkhaus-manager
 WORKDIR /home/app/parkhaus-manager
-RUN mvn install -Pnative
+RUN mvn -ntp install -Pnative
 
 FROM oracle/graalvm-ce:20.1.0-java11 as graalvm
 COPY --from=maven /home/app/parkhaus-manager /home/app/parkhaus-manager
