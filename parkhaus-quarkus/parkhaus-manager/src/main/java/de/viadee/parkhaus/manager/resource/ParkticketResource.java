@@ -47,19 +47,7 @@ public class ParkticketResource {
     @Path("{id}/makePayment")
     @Consumes(MediaType.TEXT_PLAIN)
     public Boolean makePayment(@PathParam("id") String id, Double payment) {
-        Parkticket parkticket = parkticketRepository.findById(id);
-
-        if (parkticket == null) {
-            throw new NoSuchElementException();
-        }
-
-        if (parkticket != null && getPaymentAmount(parkticket).equals(payment)) {
-            parkticket.setPayment(LocalDateTime.now());
-            parkticketRepository.persist(parkticket);
-            return true;
-        } else {
-            return false;
-        } 
+        return parkticketService.makePayment(id, payment);
     }
 
     @Path("/getAll")

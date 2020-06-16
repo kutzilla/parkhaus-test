@@ -2,7 +2,6 @@ package de.viadee.parkhaus.manager.service;
 
 import de.viadee.parkhaus.manager.config.ParkhausConfig;
 import de.viadee.parkhaus.manager.entity.Parkticket;
-import de.viadee.parkhaus.manager.entity.Payment;
 import de.viadee.parkhaus.manager.repository.ParkticketRepository;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -65,14 +64,14 @@ public class ParkticketService {
     }
 
 
-    public boolean makePayment(Payment payment) {
-        Parkticket parkticket = parkticketRepository.findById(payment.getId());
+    public boolean makePayment(String id, Double payment) {
+        Parkticket parkticket = parkticketRepository.findById(id);
 
         if (parkticket == null) {
             throw new NoSuchElementException();
         }
 
-        if (parkticket != null && getPaymentAmount(parkticket).equals(payment.getPayment())) {
+        if (parkticket != null && getPaymentAmount(parkticket).equals(payment)) {
             parkticket.setPayment(LocalDateTime.now());
             parkticketRepository.persist(parkticket);
             return true;
