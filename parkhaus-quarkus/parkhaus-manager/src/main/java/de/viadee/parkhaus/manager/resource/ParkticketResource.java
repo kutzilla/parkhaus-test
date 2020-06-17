@@ -50,6 +50,7 @@ public class ParkticketResource {
         return parkticketService.makePayment(id, payment);
     }
 
+    @GET
     @Path("/getAll")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Parkticket> getAll() {

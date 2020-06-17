@@ -8,31 +8,31 @@
 
 ## Implementations
 
-### Micronaut
+### Spring
 
-[Getting started](./parkhaus-micronaut/README.md)
+[Getting started](./parkhaus-spring/README.md)
 
-| Components                                                |
-| --------------------------------------------------------- |
-| [Micronaut Manager](./parkhaus-quarkus/parkhaus-manager)  |
-| [Micronaut Schranke](./parkhaus-quarkus/parkhaus-manager) |
+| Components                                            | Port |
+| ----------------------------------------------------- |-----:|
+| [Spring Manager](./parkhaus-spring/parkhaus-manager)  | 8080 |
+| [Spring Schranke](./parkhaus-spring/parkhaus-schranke)| 8081 | 
+
 
 ### Quarkus
 
 [Getting started](./parkhaus-quarkus/README.md)
 
 
-| Components                                                |
-| --------------------------------------------------------- |
-| [Quarkus Manager](./parkhaus-quarkus/parkhaus-manager)  |
-| [Quarkus Schranke](./parkhaus-quarkus/parkhaus-manager) |
+| Components                                              | Port |
+| --------------------------------------------------------|-----:|
+| [Quarkus Manager](./parkhaus-quarkus/parkhaus-manager)  | 8180 |
+| [Quarkus Schranke](./parkhaus-quarkus/parkhaus-schranke)| 8181 |
 
+### Micronaut
 
-### Spring
+[Getting started](./parkhaus-micronaut/README.md)
 
-[Getting started](./parkhaus-spring/README.md)
-
-| Components                                            |
-| ----------------------------------------------------- |
-| [Spring Manager](./parkhaus-spring/parkhaus-manager)  |
-| [Spring Schranke](./parkhaus-spring/parkhaus-manager) |
+| Components                                                  | Port |
+| ------------------------------------------------------------|-----:|
+| [Micronaut Manager](./parkhaus-micronaut/parkhaus-manager)  | 8280 |
+| [Micronaut Schranke](./parkhaus-micronaut/parkhaus-schranke)| 8181 |

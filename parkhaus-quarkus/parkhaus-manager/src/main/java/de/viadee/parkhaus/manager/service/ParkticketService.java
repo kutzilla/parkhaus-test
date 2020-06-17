@@ -7,8 +7,6 @@ import de.viadee.parkhaus.manager.repository.ParkticketRepository;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.BadRequestException;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.QueryParam;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -27,10 +25,10 @@ public class ParkticketService {
         this.parkhausConfig = parkhausConfig;
     }
 
-    public String create(@QueryParam("entered") LocalDateTime entered) {
+    public String create(LocalDateTime entered) {
 
         if (entered == null) {
-            throw new BadRequestException("validTo must be specified");
+            throw new BadRequestException("entered must be specified");
         }
 
         Parkticket parkticket = new Parkticket(entered);
@@ -45,7 +43,7 @@ public class ParkticketService {
     }
 
 
-    public Double getPaymentAmount(@PathParam("id") String id) {
+    public Double getPaymentAmount(String id) {
         Parkticket parkticket = parkticketRepository.findById(id);
         if (parkticket == null) {
             throw new NoSuchElementException();
@@ -86,7 +84,7 @@ public class ParkticketService {
     }
 
 
-    public boolean isAllowedToExit(@PathParam("id") String id) {
+    public boolean isAllowedToExit(String id) {
         Parkticket parkticket = this.parkticketRepository.findById(id);
 
         if (parkticket == null) {
