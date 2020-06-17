@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 import javax.inject.Inject;
 
 import static io.restassured.RestAssured.given;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @QuarkusTest
 @Tag("integration")

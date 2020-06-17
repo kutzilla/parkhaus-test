@@ -1,89 +1,53 @@
 package de.viadee.parkhaus.manager.resource;
 
-import de.viadee.parkhaus.manager.config.ParkhausConfig;
 import de.viadee.parkhaus.manager.entity.Parkticket;
-import de.viadee.parkhaus.manager.repository.ParkticketRepository;
+import de.viadee.parkhaus.manager.service.ParkticketService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.Collection;
-import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/parkticket")
 public class ParkticketResource {
 
-    private ParkticketRepository parkticketRepository;
+    private ParkticketService parkticketService;
 
-    private ParkhausConfig parkhausConfig;
-
-    public ParkticketResource(ParkticketRepository ParkticketRepository, ParkhausConfig parkhausConfig) {
-        this.parkticketRepository = ParkticketRepository;
-        this.parkhausConfig = parkhausConfig;
+    @Autowired
+    public ParkticketResource(ParkticketService parkticketService) {
+        this.parkticketService = parkticketService;
     }
 
     @PostMapping
     public String create(@RequestParam("entered") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime entered) {
-
-        Parkticket parkticket = new Parkticket(entered);
-
-        parkticketRepository.save(parkticket);
-
-        return parkticket.getId();
+        return parkticketService.create(entered);
     }
 
     @GetMapping
     public Parkticket get(String id) {
-        return parkticketRepository.findById(id).orElseThrow(NoSuchElementException::new);
+        return parkticketService.get(id);
     }
 
    @GetMapping(path = "{id}/getPaymentAmount")
     public Double getPaymentAmount(@PathVariable("id") String id) {
-        Parkticket parkticket = parkticketRepository.findById(id).orElseThrow(NoSuchElementException::new);
-
-        return getPaymentAmount(parkticket);
-    }
-
-    private Double getPaymentAmount(Parkticket parkticket) {
-        LocalDateTime to = LocalDateTime.now();
-
-        LocalDateTime from = parkticket.getEntered();
-
-        long parkingTime = ChronoUnit.HOURS.between(from, to);
-
-        return parkhausConfig.getGebuehr() * parkingTime;
+        return parkticketService.getPaymentAmount(id);
     }
 
     @PutMapping(value = "{id}/makePayment", consumes = MediaType.TEXT_PLAIN_VALUE)
     public Boolean makePayment(@RequestBody String payment, @PathVariable String id) {
-        Parkticket parkticket = parkticketRepository.findById(id).orElseThrow(NoSuchElementException::new);
-
-       if (getPaymentAmount(parkticket).equals(Double.valueOf(payment))) {
-            parkticket.setPayment(LocalDateTime.now());
-            parkticketRepository.save(parkticket);
-            return true;
-        } else {
-           return false;
-        }
-
+        return parkticketService.makePayment(payment, id);
     }
 
     @GetMapping(path = "getAll")
     public Collection<Parkticket> getAll() {
-        return parkticketRepository.findAll();
+        return parkticketService.getAll();
     }
 
     @GetMapping(path = "/{id}/isAllowedToExit")
     public Boolean isAllowedToExit(@PathVariable("id") String id) {
-        Parkticket parkticket = parkticketRepository.findById(id).orElseThrow(NoSuchElementException::new);
-
-        LocalDateTime now = LocalDateTime.now();
-        return parkticket.getEntered().isBefore(now)
-                && parkticket.getPayment() != null
-                && now.minusMinutes(parkhausConfig.getToleranceBtwPaymentAndExit()).isBefore(parkticket.getPayment());
+        return parkticketService.isAllowedToExit(id);
     }
-
 }

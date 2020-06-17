@@ -1,6 +1,5 @@
 package de.viadee.parkhaus.manager.service;
 
-import de.viadee.parkhaus.manager.service.ParkticketService;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
 

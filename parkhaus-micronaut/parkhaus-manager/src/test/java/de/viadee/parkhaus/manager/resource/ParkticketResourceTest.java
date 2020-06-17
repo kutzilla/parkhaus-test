@@ -10,17 +10,12 @@ import io.micronaut.test.annotation.MicronautTest;
 import org.junit.jupiter.api.Test;
 
 import javax.inject.Inject;
-import java.time.LocalDateTime;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @MicronautTest
 public class ParkticketResourceTest {
 
-   @Inject
-   ParkticketResource parkticketResource;
 
    @Inject
    EmbeddedServer server;
@@ -28,14 +23,6 @@ public class ParkticketResourceTest {
    @Inject
    @Client("/")
    HttpClient client;
-
-   /*
-    * Unittest
-    */
-   @Test
-   public void createTest(){
-         assertNotNull(parkticketResource.create(LocalDateTime.now()));
-   }
 
    /*
     * Integrationstest

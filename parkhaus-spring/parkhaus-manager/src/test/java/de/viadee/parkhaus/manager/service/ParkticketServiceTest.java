@@ -1,5 +1,6 @@
-package de.viadee.parkhaus.manager.resource;
+package de.viadee.parkhaus.manager.service;
 
+import de.viadee.parkhaus.manager.resource.ParkticketResource;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,18 +16,15 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
-@AutoConfigureMockMvc
 @ExtendWith(SpringExtension.class)
-public class ParkticketResourceTest {
+public class ParkticketServiceTest {
 
     @Autowired
-    MockMvc mvc;
+    ParkticketService parkticketService;
 
     @Test
-    public void createIT() throws Exception {
-        mvc.perform(post("/parkticket?entered=2020-01-31T18:00"))
-                .andExpect(status().isOk());
-
+    public void createTest() {
+        assertNotNull(parkticketService.create(LocalDateTime.now()));
     }
 
 }

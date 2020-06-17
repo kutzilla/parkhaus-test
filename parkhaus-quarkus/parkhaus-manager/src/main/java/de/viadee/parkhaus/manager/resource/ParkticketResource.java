@@ -1,7 +1,6 @@
 package de.viadee.parkhaus.manager.resource;
 
 import de.viadee.parkhaus.manager.entity.Parkticket;
-import de.viadee.parkhaus.manager.repository.ParkticketRepository;
 import de.viadee.parkhaus.manager.service.ParkticketService;
 
 import javax.inject.Inject;
@@ -37,10 +36,6 @@ public class ParkticketResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Double getPaymentAmount(@PathParam("id") String id) {
       return parkticketService.getPaymentAmount(id);
-    }
-
-    private Double getPaymentAmount(Parkticket parkticket) {
-      return parkticketService.getPaymentAmount(parkticket);
     }
 
     @PUT
