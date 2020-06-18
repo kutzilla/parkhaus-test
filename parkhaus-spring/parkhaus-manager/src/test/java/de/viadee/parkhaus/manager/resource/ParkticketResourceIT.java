@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @ExtendWith(SpringExtension.class)
-public class ParkticketResourceTest {
+public class ParkticketResourceIT {
 
     @Autowired
     MockMvc mvc;

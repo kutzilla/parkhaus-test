@@ -14,7 +14,7 @@ import javax.inject.Inject;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @MicronautTest
-public class ParkticketResourceTest {
+public class ParkticketResourceIT {
 
 
    @Inject

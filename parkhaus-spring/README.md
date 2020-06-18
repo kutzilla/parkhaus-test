@@ -21,7 +21,7 @@ mvn clean install
 ##### Run
 
 ```
-TBD
+java -jar target/parkhaus-manager-spring-1.0-SNAPSHOT.jar
 ```
 
 #### Parkhaus Schranke
@@ -39,7 +39,7 @@ mvn clean install
 ##### Run
 
 ```
-TDB
+java -jar target/parkhaus-schranke-spring-1.0-SNAPSHOT.jar
 ```
 
 
