@@ -26,7 +26,7 @@ public class ParkticketService {
         this.parkhausConfig = parkhausConfig;
     }
 
-    public String create(@RequestParam("entered") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime entered) {
+    public String create(LocalDateTime entered) {
 
         Parkticket parkticket = new Parkticket(entered);
 
@@ -39,7 +39,7 @@ public class ParkticketService {
         return parkticketRepository.findById(id).orElseThrow(NoSuchElementException::new);
     }
 
-    public Double getPaymentAmount(@PathVariable("id") String id) {
+    public Double getPaymentAmount(String id) {
         Parkticket parkticket = parkticketRepository.findById(id).orElseThrow(NoSuchElementException::new);
 
         return getPaymentAmount(parkticket);
@@ -55,7 +55,7 @@ public class ParkticketService {
         return parkhausConfig.getGebuehr() * parkingTime;
     }
 
-    public Boolean makePayment(@RequestBody String payment, @PathVariable String id) {
+    public Boolean makePayment(String payment, String id) {
         Parkticket parkticket = parkticketRepository.findById(id).orElseThrow(NoSuchElementException::new);
 
        if (getPaymentAmount(parkticket).equals(Double.valueOf(payment))) {
@@ -72,7 +72,7 @@ public class ParkticketService {
         return parkticketRepository.findAll();
     }
 
-    public Boolean isAllowedToExit(@PathVariable("id") String id) {
+    public Boolean isAllowedToExit(String id) {
         Parkticket parkticket = parkticketRepository.findById(id).orElseThrow(NoSuchElementException::new);
 
         LocalDateTime now = LocalDateTime.now();
