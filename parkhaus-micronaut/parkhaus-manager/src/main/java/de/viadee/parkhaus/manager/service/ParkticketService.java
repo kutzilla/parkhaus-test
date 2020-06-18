@@ -3,9 +3,6 @@ package de.viadee.parkhaus.manager.service;
 import de.viadee.parkhaus.manager.config.ParkhausConfig;
 import de.viadee.parkhaus.manager.entity.Parkticket;
 import de.viadee.parkhaus.manager.repository.ParkticketRepository;
-import io.micronaut.http.annotation.Body;
-import io.micronaut.http.annotation.PathVariable;
-import io.micronaut.http.annotation.QueryValue;
 
 import javax.inject.Singleton;
 import java.time.LocalDateTime;
@@ -25,7 +22,7 @@ public class ParkticketService {
         this.parkhausConfig = parkhausConfig;
     }
 
-    public String create(@QueryValue("entered") LocalDateTime entered) {
+    public String create(LocalDateTime entered) {
 
         Parkticket parkticket = new Parkticket(entered);
 
@@ -38,7 +35,7 @@ public class ParkticketService {
         return parkticketRepository.findById(id).orElse(null);
     }
 
-    public Double getPaymentAmount(@PathVariable("id") String id) {
+    public Double getPaymentAmount(String id) {
         Parkticket parkticket = parkticketRepository.findById(id).orElseThrow(NoSuchElementException::new);
         return getPaymentAmount(parkticket);
     }
@@ -53,7 +50,7 @@ public class ParkticketService {
         return parkhausConfig.getGebuehr() * parkingTime;
     }
 
-    public Boolean makePayment(@PathVariable("id") String id, @Body Double payment) {
+    public Boolean makePayment(String id, Double payment) {
         Parkticket parkticket = parkticketRepository.findById(id).orElseThrow(NoSuchElementException::new);
 
         if (parkticket != null && getPaymentAmount(parkticket).equals(payment)) {
@@ -70,7 +67,7 @@ public class ParkticketService {
         return parkticketRepository.findAll();
     }
 
-    public boolean isAllowedToExit(@PathVariable("id") String id) {
+    public boolean isAllowedToExit(String id) {
         Parkticket parkticket = this.parkticketRepository.findById(id).orElseThrow(NoSuchElementException::new);
         LocalDateTime now = LocalDateTime.now();
         return parkticket.getEntered().isBefore(now)
