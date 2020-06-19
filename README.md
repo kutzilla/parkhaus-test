@@ -8,7 +8,7 @@
 
 ## Implementations
 
-<table border="1"; width=100%>
+<table>
     <tr>
         <th colspan="2">Spring</th>
         <th colspan="2">Quarkus</th>
